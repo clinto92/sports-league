@@ -1,0 +1,31 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "sports-league-backend",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon --experimental-modules --es-module-specifier-resolution=node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vaco-Binary-Semantics-LLP/assignment-clinto92.git"
+  },
+  "keywords": [
+    "express",
+    "js"
+  ],
+  "author": "Clinto Abraham Ayamkudiyil",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Vaco-Binary-Semantics-LLP/assignment-clinto92/issues"
+  },
+  "homepage": "https://github.com/Vaco-Binary-Semantics-LLP/assignment-clinto92#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^9.0.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.29"
+  }
+}
