@@ -1,0 +1,15 @@
+heroku login
+heroku git:clone -a sports-league-server
+ cd sports-league-server
+ git add .
+ git commit -am "make it better"
+ git push heroku master
+
+heroku config:set NODE_ENV=production   
+heroku config:set DATABASE='mongodb+srv://clinto:vaco@sportsleaguecluster.oejji.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'           
+heroku config:set JWT-SECRET=test
+
+heroku open 
+
+
+https://sports-league-server.herokuapp.com/

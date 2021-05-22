@@ -23,8 +23,9 @@ export const updatePlayer = async (req, res, next) => {
     return res.status(404).send(`No post with id: ${id}`);
 
   const updatedPost = {
-    teamname: req.body.teamname,
-    players: [req.body.players],
+    teamName: req.body.teamName,
+    place: req.body.place,
+    players: req.body.players,
   };
 
   await TeamModel.findByIdAndUpdate(id, updatedPost, { new: true });
@@ -36,10 +37,10 @@ export const deletePlayer = async (req, res, next) => {
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id))
-    return res.status(404).send(`No post with id: ${id}`);
+    return res.status(404).send(`No team with id: ${id}`);
 
   await TeamsModel.findByIdAndRemove(id);
-  res.json({ message: "Post deleted successfully." });
+  res.json({ message: "Team deleted successfully." });
   next();
 };
 

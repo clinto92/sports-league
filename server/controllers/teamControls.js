@@ -32,15 +32,16 @@ export const getTeam = async (req, res, next) => {
   next();
 };
 
- // let new_array = array.map(element => element.id == 2 ? {...element, name : 'New Name'} : element);
+
 export const updateTeam = async (req, res, next) => {
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id))
     return res.status(404).send(`No teams with id: ${id}`);
-  
-   
+
     const updatedPost  = {
-      players: [req.body.players],
+      players: req.body.players,
+      place: req.body.place,
+      teamName: req.body.teamName,
     };
 
     await TeamModel.findByIdAndUpdate(id, updatedPost , { new: true });
@@ -53,10 +54,10 @@ export const deleteTeam = async (req, res, next) => {
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id))
-    return res.status(404).send(`No post with id: ${id}`);
+    return res.status(404).send(`No team with id: ${id}`);
 
-  await TeamsModel.findByIdAndRemove(id);
-  res.json({ message: "Post deleted successfully." });
+  await TeamModel.findByIdAndRemove(id);
+  res.json({ message: "Team deleted successfully." });
   next();
 };
 

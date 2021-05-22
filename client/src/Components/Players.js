@@ -8,7 +8,10 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import { Paper, Typography } from "@material-ui/core";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
-import { getPlayersAction } from "../redux/actions/PlayerAction";
+import Chip from "@material-ui/core/Chip";
+import { TextField } from "@material-ui/core";
+import InputAdornment from '@material-ui/core/InputAdornment';
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -37,20 +40,41 @@ const useStyles = makeStyles({
     padding: "20px",
     backgroundColor: "transparent",
   },
+  chips:{
+    margin: "5px",
+    display: "block",
+    width: "30%",
+  },
+  textField: {
+    display: "block",
+    margin: "10px"
+  },
 });
 
 export const Players = () => {
   const classes = useStyles();
   const TeamsDataBase = useSelector((state) => state.teams);
   const dispatch = useDispatch();
-  // const [updatedPlayersData, setUpdatedPlayersData] = useState();
+  const [search, setSearch] = useState("");
+  const [updatedPlayersData, setUpdatedPlayersData] = useState([]);
+  
+  useEffect(()=>{
+    setUpdatedPlayersData(TeamsDataBase);
+  },[search, updatedPlayersData, TeamsDataBase, dispatch]);
  
 
+console.log(updatedPlayersData)
   return (
     <>
-      <Typography variant="h3">My Players</Typography>
+     <Paper elevation={3} className={classes.players}>
+      <Typography variant="h3">My Players</Typography></Paper>
       <Paper elevation={3} className={classes.players}>
         <Paper elevation={3} className={classes.center}>
+        <TextField  
+          label="Search me!" 
+          value={search}
+          onChange={(e)=> setSearch(e.target.value)} 
+          />
           <TableContainer component={Paper} className="padding-grid ">
             <Table className={classes.table} aria-label="customized table">
               <TableHead>
@@ -58,19 +82,47 @@ export const Players = () => {
                   <StyledTableCell align="left">Title Of Teams </StyledTableCell>
                   <StyledTableCell align="left">:</StyledTableCell>
                   <StyledTableCell align="left">Name of Players</StyledTableCell>
+                  <StyledTableCell align="left">:</StyledTableCell>
+                  <StyledTableCell align="left">Origin</StyledTableCell>
                 </TableRow>
               </TableHead>
 
               <TableBody>
-                {TeamsDataBase.map((P) => (
+                {updatedPlayersData.filter(item => {
+                  
+                  if (search ===""){
+                    return item
+                  } else if(item.teamName.toLowerCase().includes(search.toLowerCase()) || item.place.toLowerCase().includes(search.toLowerCase()) ){
+                    return item
+                  }
+                  return console.log(item)
+                }).map((P) => (
                   <StyledTableRow key={P._id}>
                     <StyledTableCell align="left">
-                      {P.teamName}
+                    <TextField
+                      label="Update team title"
+                      className={`${classes.margin} ${classes.textField}`}
+                      InputProps={{
+                        startAdornment: <InputAdornment position="start">{P.teamName} <ArrowForwardIcon /></InputAdornment>,
+                      }}
+                    />
+                    <TextField
+                      label="Update team title"
+                      className={`${classes.margin} ${classes.textField}`}
+                      InputProps={{
+                        startAdornment: <InputAdornment position="start">{P.teamName} <ArrowForwardIcon /></InputAdornment>,
+                      }}
+                    />
                     </StyledTableCell>
                     <StyledTableCell align="left">:</StyledTableCell>
                     <StyledTableCell align="left">
-                      <li>{P.players}</li>
+                    
+                      {P.players.map((teamDataRendered,index) => 
+                       <Chip key={teamDataRendered.index} label={`${index + 1} # ${teamDataRendered}`} onDelete={() => {}} className={classes.chips} />
+                       )}
                     </StyledTableCell>
+                    <StyledTableCell align="left">:</StyledTableCell>
+                    <StyledTableCell align="left" key={P.place} >{P.place}</StyledTableCell>
                   </StyledTableRow>
                 ))}
               </TableBody>
