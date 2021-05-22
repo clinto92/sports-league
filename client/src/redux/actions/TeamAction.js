@@ -33,9 +33,9 @@ export const deleteTeamAction = (id) => async (dispatch) => {
   }
 };
 
-export const updateTeamAction = (id, updatedTeamForm) => async (dispatch) => {
+export const updateTeamAction = (id, createPlayersData) => async (dispatch) => {
   try {
-    const { data } = await api.updatePlayers(id, updatedTeamForm);
+    const { data } = await api.updatePlayers(id, createPlayersData);
     dispatch({ type: UPDATE_TEAM, payload: data });
   } catch (error) {
     console.log(error);

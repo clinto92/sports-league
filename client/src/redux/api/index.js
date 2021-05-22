@@ -14,4 +14,4 @@ export const createTeam = (createTeamData) =>
   API.post("/create-team", createTeamData);
 export const fetchTeams = () => API.get("/teams-info");
 export const deleteTeam = (id) => API.delete(`/delete-team/${id}`);
-export const updateTeam = (id) => API.patch(`/update-team/${id}`);
+export const updateTeam = (id, createPlayersData) => API.patch(`/update-team/${id}`, createPlayersData);

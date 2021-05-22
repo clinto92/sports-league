@@ -1,4 +1,4 @@
-import { FETCH_TEAM, DELETE_TEAM, CREATE_TEAM } from "../constants/actionTypes";
+import { FETCH_TEAM, DELETE_TEAM, CREATE_TEAM, UPDATE_TEAM } from "../constants/actionTypes";
 
 function teams(teams = [], action) {
   switch (action.type) {
@@ -6,6 +6,10 @@ function teams(teams = [], action) {
       return action.payload;
     case CREATE_TEAM:
       return [...teams, action.payload];
+    case UPDATE_TEAM:
+      return teams.map((child) =>
+        child._id === action.payload._id ? [...teams, action.payload] : child
+      );
     case DELETE_TEAM:
       return teams.filter((team) => team._id !== action.payload);
     default:

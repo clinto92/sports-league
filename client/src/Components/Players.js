@@ -32,35 +32,40 @@ const useStyles = makeStyles({
   table: {
     minWidth: 700,
   },
+  players: {
+    margin: "50px",
+    padding: "20px",
+    backgroundColor: "transparent",
+  },
 });
 
 export const Players = () => {
   const classes = useStyles();
-  const Players = useSelector((state) => state.players);
+  const TeamsDataBase = useSelector((state) => state.teams);
   const dispatch = useDispatch();
   // const [updatedPlayersData, setUpdatedPlayersData] = useState();
-  dispatch(getPlayersAction());
+ 
 
   return (
     <>
       <Typography variant="h3">My Players</Typography>
-      <Paper elevation={3} className={classes.center}>
+      <Paper elevation={3} className={classes.players}>
         <Paper elevation={3} className={classes.center}>
           <TableContainer component={Paper} className="padding-grid ">
             <Table className={classes.table} aria-label="customized table">
               <TableHead>
                 <TableRow>
-                  <StyledTableCell align="left">Title </StyledTableCell>
+                  <StyledTableCell align="left">Title Of Teams </StyledTableCell>
                   <StyledTableCell align="left">:</StyledTableCell>
-                  <StyledTableCell align="left">Value</StyledTableCell>
+                  <StyledTableCell align="left">Name of Players</StyledTableCell>
                 </TableRow>
               </TableHead>
 
               <TableBody>
-                {Players.map((P) => (
+                {TeamsDataBase.map((P) => (
                   <StyledTableRow key={P._id}>
                     <StyledTableCell align="left">
-                      {P.teamname}{" "}
+                      {P.teamName}
                     </StyledTableCell>
                     <StyledTableCell align="left">:</StyledTableCell>
                     <StyledTableCell align="left">

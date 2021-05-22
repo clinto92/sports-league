@@ -3,22 +3,22 @@ import mongoose from "mongoose";
 const router = express.Router();
 import TeamModel from "../Models/teamModel.js";
 
-export const createTeam = async (req, res) => {
-  const form = {
-    teamname: req.body.teamname,
-    players: [req.body.players],
-  };
-  console.log(form);
-  const Team = new TeamModel(form);
+// 
+export const createTeam = async (req, res,next) => {
+  const post = req.body;
+
+  const newPostMessage = new TeamModel({ ...post, createdAt: new Date().toISOString() })
 
   try {
-    const result = await Team.save();
+      await newPostMessage.save();
 
-    res.status(201).json(result);
+      res.status(201).json(newPostMessage);
   } catch (error) {
-    res.status(409).json({ error });
+      res.status(409).json({ message: error.message });
   }
-};
+  next();
+}
+
 
 export const getTeam = async (req, res, next) => {
   try {
@@ -32,20 +32,20 @@ export const getTeam = async (req, res, next) => {
   next();
 };
 
+ // let new_array = array.map(element => element.id == 2 ? {...element, name : 'New Name'} : element);
 export const updateTeam = async (req, res, next) => {
   const { id } = req.params;
-  // const { title, message, creator, selectedFile, tags } = req.body;
-
   if (!mongoose.Types.ObjectId.isValid(id))
-    return res.status(404).send(`No post with id: ${id}`);
+    return res.status(404).send(`No teams with id: ${id}`);
+  
+   
+    const updatedPost  = {
+      players: [req.body.players],
+    };
 
-  const updatedPost = {
-    teamname: req.body.teamname,
-    players: [req.body.players],
-  };
+    await TeamModel.findByIdAndUpdate(id, updatedPost , { new: true });
 
-  await TeamModel.findByIdAndUpdate(id, updatedPost, { new: true });
-  res.json(updatedPost);
+    res.status(200).json(updatedPost);
   next();
 };
 
