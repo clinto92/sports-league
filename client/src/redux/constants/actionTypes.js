@@ -9,3 +9,8 @@ export const DELETE_PLAYER = "DELETE_PLAYER";
 
 export const FETCH_TEAM = "FETCH_TEAM";
 export const FETCH_PLAYERS = "FETCH_PLAYERS";
+
+export const START_LOADING = "START_LOADING";
+export const END_LOADING = "END_LOADING";
+export const FETCH_BY_SEARCH = "FETCH_BY_SEARCH";
+export const FETCH_ALL = "FETCH_ALL";

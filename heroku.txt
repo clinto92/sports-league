@@ -9,6 +9,8 @@ heroku config:set NODE_ENV=production
 heroku config:set DATABASE='mongodb+srv://clinto:vaco@sportsleaguecluster.oejji.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'           
 heroku config:set JWT-SECRET=test
 
+heroku apps:rename sports-league-server                (it helps to change the url domain)
+
 heroku open 
 
 

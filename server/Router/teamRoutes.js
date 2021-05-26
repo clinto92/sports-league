@@ -7,12 +7,9 @@ import {
   getTeam,
   updateTeam,
   deleteTeam,
-} from "../controllers/teamControls.js";
-import {
-  getPlayers,
-  updatePlayer,
   deletePlayer,
-} from "../controllers/playersControl.js";
+} from "../controllers/teamControls.js";
+
 const corsOptions = {
   "origin": "*",
   "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
@@ -20,15 +17,13 @@ const corsOptions = {
   "optionsSuccessStatus": 204,
 }
 
-// team
 router.post("/create-team", cors(corsOptions), createTeam);
 router.get("/teams-info", cors(corsOptions), getTeam);
 router.patch("/update-team/:id", cors(corsOptions), updateTeam);
 router.delete("/delete-team/:id", cors(corsOptions), deleteTeam);
-// player
-// router.post("/create-player", createplayer);
-router.get("/players-info", getPlayers);
-router.patch("/update-player/:id", updatePlayer);
-router.delete("/delete-player/:id", deletePlayer);
+router.delete("/delete-player/:id", cors(corsOptions), deletePlayer);
+// export const deletePlayerAPI = (id, index) => API.delete(`/delete-player/${id}?indexOf=${index}`);
+// export const fetchWhole = (page) => API.get(`/teams-info?page=${page}`);
+
 
 export default router;
