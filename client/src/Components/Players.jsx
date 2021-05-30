@@ -25,8 +25,9 @@ export const Players = () => {
     search,
     updated,
     setUpdated,
-    searchTeam
+    searchTeam,
   } = usePlayers();
+ 
   return (
     <>
       <Paper elevation={3} className={classes.players}>

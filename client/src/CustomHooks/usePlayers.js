@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getTeamBySearchAction, getTeamsAction, updateTeamAction } from "../redux/actions/TeamAction";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 
-
+function useQuery() {
+  return new URLSearchParams(useLocation().search);
+}
     
 export const usePlayers = () => {
   const query = useQuery()
@@ -19,7 +21,8 @@ export const usePlayers = () => {
   });
   const [updated, setUpdated] = useState({ teamName: "", place: "" });
   const { teams, isLoading} = useSelector((state) => state.teams);
-  console.log("dataBase - by useSelector", teams);
+  const post = useSelector((state) => state.teams);
+  console.log("dataBase - by useSelector", teams, isLoading, post);
   const [search, setSearch] = useState("");
 
   setTeamDatabase(teams);
@@ -60,5 +63,6 @@ export const usePlayers = () => {
     search,
     updated,
     setUpdated,
+  
   };
 };

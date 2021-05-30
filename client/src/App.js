@@ -5,6 +5,7 @@ import Navbar from "./Components/Navbar.jsx";
 import Teams from "./Components/Teams.jsx";
 import { Players } from "./Components/Players.jsx";
 import { NotFound } from "./Components/Not_Found/NotFound";
+import { BottomAppBar } from "./Components/BottomAppBar";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <NotFound />
           </Route>
         </Switch>
+        <BottomAppBar />
       </Router>
     </div>
   );
